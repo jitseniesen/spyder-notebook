@@ -38,7 +38,7 @@ jobs:
         run: conda install -c spyder-ide --file requirements/tests.txt -y -q
       - name: Install Package
         shell: bash -l {0}
-        run: pip install -e .
+        run: pip install --no-deps -e .
       - name: Show environment information
         shell: bash -l {0}
         run: |
