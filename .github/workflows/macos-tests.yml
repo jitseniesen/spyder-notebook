@@ -49,4 +49,4 @@ jobs:
       - name: Run tests
         shell: bash -l {0}
         run: pytest spyder_notebook --cov=spyder_notebook -x -vv
-	timeout-minutes: 10
+        timeout-minutes: 10
