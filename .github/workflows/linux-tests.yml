@@ -58,6 +58,7 @@ jobs:
       - name: Run tests
         shell: bash -l {0}
         run: xvfb-run --auto-servernum pytest spyder_notebook --cov=spyder_notebook -x -vv
+	timeout-minutes: 10
       - name: Upload coverage to Codecov
         if: matrix.PYTHON_VERSION == '3.8'
         shell: bash -l {0}
