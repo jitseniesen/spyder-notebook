@@ -122,7 +122,7 @@ def test_check_server_started_if_started(mocker, qtbot):
         serverManager._check_server_started(server_process)
 
     fake_open.assert_called_once_with(
-        osp.join('runtimedir', 'nbserver-7.json'), encoding='utf-8')
+        osp.join('runtimedir', 'jpserver-7.json'), encoding='utf-8')
     assert server_process.state == ServerState.RUNNING
     assert server_process.server_info == {'foo': 42}
 
@@ -143,7 +143,7 @@ def test_check_server_started_if_not_started(mocker, qtbot):
     serverManager._check_server_started(server_process)
 
     fake_open.assert_called_once_with(
-        osp.join('runtimedir', 'nbserver-7.json'), encoding='utf-8')
+        osp.join('runtimedir', 'jpserver-7.json'), encoding='utf-8')
     assert server_process.state == ServerState.STARTING
     mock_QTimer.singleShot.assert_called_once()
 
@@ -165,7 +165,7 @@ def test_check_server_started_if_timed_out(mocker, qtbot):
         serverManager._check_server_started(server_process)
 
     fake_open.assert_called_once_with(
-        osp.join('runtimedir', 'nbserver-7.json'), encoding='utf-8')
+        osp.join('runtimedir', 'jpserver-7.json'), encoding='utf-8')
     assert server_process.state == ServerState.TIMED_OUT
 
 
