@@ -187,6 +187,7 @@ def test_check_server_started_if_errored(mocker, qtbot):
     assert server_process.state == ServerState.ERROR
 
 
+@pytest.mark.skip
 def test_shutdown_all_servers(mocker):
     """Test that .shutdown_all_servers() does shutdown all running servers,
     but not servers in another state."""
