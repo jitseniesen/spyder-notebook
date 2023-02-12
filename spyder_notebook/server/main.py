@@ -5,9 +5,9 @@
 
 import os
 from jinja2 import FileSystemLoader
-from notebook.base.handlers import IPythonHandler, FileFindHandler
-from notebook.notebookapp import flags, NotebookApp
-from notebook.utils import url_path_join as ujoin
+from jupyter_server.utils import url_path_join as ujoin
+from notebook.app import (
+    flags, JupyterNotebookApp, NotebookBaseHandler)
 from traitlets import Bool
 
 HERE = os.path.dirname(__file__)
@@ -18,7 +18,7 @@ flags['dark'] = (
 )
 
 
-class NotebookHandler(IPythonHandler):
+class NotebookHandler(NotebookBaseHandler):
     """
     Serve a notebook file from the filesystem in the notebook interface
     """
@@ -52,7 +52,7 @@ class NotebookHandler(IPythonHandler):
         return loader.load(self.settings['jinja2_env'], name)
 
 
-class SpyderNotebookServer(NotebookApp):
+class SpyderNotebookServer(JupyterNotebookApp):
     """Server rendering notebooks in HTML and serving them over HTTP."""
 
     flags = flags
@@ -69,8 +69,6 @@ class SpyderNotebookServer(NotebookApp):
 
         default_handlers = [
             (ujoin(self.base_url, r'/notebook/(.*)'), NotebookHandler),
-            (ujoin(self.base_url, r"/static/(.*)"), FileFindHandler,
-                {'path': os.path.join(HERE, 'build')})
         ]
         self.web_app.add_handlers('.*$', default_handlers)
 

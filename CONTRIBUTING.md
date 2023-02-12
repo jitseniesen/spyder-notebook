@@ -54,6 +54,18 @@ the conda environment.
 $ conda install --file requirements/conda.txt
 ```
 
+**For version 0.5.0-alpha of the plugin:** The plugin is based on
+Jupyter Notebook 7, which is only available as alpha release on
+PyPI. So in addition, we need to install it with pip usig the
+following command:
+
+```bash
+$ python -m pip install notebook --pre
+```
+
+Cross your fingers that there the mixing of pip and conda does not
+cause any problems!
+
 ### Building the notebook server
 
 The Spyder notebook plugin includes a server which serves notebooks as HTML
