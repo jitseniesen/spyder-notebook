@@ -16,7 +16,9 @@ spyder_crash.log
 .cache
 .coverage
 *.egg-info/
+spyder_notebook/server/app/node_modules/
 spyder_notebook/server/node_modules/
+spyder_notebook/server/static/
 spyder_notebook/server/yarn.lock
 
 # git .orig files
