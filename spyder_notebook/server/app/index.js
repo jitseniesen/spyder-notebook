@@ -358,7 +358,7 @@ async function main() {
       console.error(reason);
     });
 
-  const NotebookApp = require('@jupyter-notebook/application').NotebookApp;
+  const NotebookApp = require('@spyder-notebook/application').SpyderNotebookApp;
   const app = new NotebookApp({ mimeExtensions });
 
   app.registerPluginModules(mods);
@@ -371,7 +371,6 @@ async function main() {
     window.jupyterapp = app;
   }
 
-  alert('Spyder was here!');  // To prove that we execute our own code
   await app.start();
 }
 

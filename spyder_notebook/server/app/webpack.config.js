@@ -159,8 +159,7 @@ module.exports = [
     mode: 'development',
     entry: ['./publicpath.js', './' + path.relative(__dirname, entryPoint)],
     output: {
-      // Spyder: directory below is changed
-      path: path.resolve(__dirname, '..', 'static/'),
+      path: path.resolve(__dirname, '..', 'notebook/static/'),
       library: {
         type: 'var',
         name: ['_JUPYTERLAB', 'CORE_OUTPUT']
