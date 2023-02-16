@@ -1,12 +1,12 @@
 {
   "name": "@spyder-notebook/app",
-  "version": "7.0.0-alpha.12",
+  "version": "0.5.0-dev.0",
   "private": true,
   "scripts": {
     "build": "webpack"
   },
   "resolutions": {
-    "@spyder-notebook/application": "~7.0.0-alpha.12",
+    "@spyder-notebook/application": "~0.5.0-dev.0",
     "@jupyter-notebook/application": "~7.0.0-alpha.12",
     "@jupyter-notebook/application-extension": "~7.0.0-alpha.12",
     "@jupyter-notebook/console-extension": "~7.0.0-alpha.12",
@@ -104,7 +104,7 @@
     "yjs": "~13.5.45"
   },
   "dependencies": {
-    "@spyder-notebook/application": "^7.0.0-alpha.12",
+    "@spyder-notebook/application": "^0.5.0-dev.0",
     "@jupyter-notebook/application": "^7.0.0-alpha.12",
     "@jupyter-notebook/application-extension": "^7.0.0-alpha.12",
     "@jupyter-notebook/console-extension": "^7.0.0-alpha.12",
