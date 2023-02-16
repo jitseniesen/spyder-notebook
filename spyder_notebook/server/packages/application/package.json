@@ -1,21 +1,6 @@
 {
   "name": "@spyder-notebook/application",
   "version": "0.5.0-dev.0",
-  "description": "Jupyter Notebook - Application",
-  "homepage": "https://github.com/jupyter/notebook",
-  "bugs": {
-    "url": "https://github.com/jupyter/notebook/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jupyter/notebook.git"
-  },
-  "license": "BSD-3-Clause",
-  "author": "Project Jupyter",
-  "sideEffects": [
-    "style/*.css",
-    "style/index.js"
-  ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "style": "style/index.css",
@@ -30,13 +15,7 @@
     "style/index.js"
   ],
   "scripts": {
-    "build": "tsc -b",
-    "build:prod": "tsc -b",
-    "build:test": "tsc --build tsconfig.test.json",
-    "clean": "rimraf lib && rimraf tsconfig.tsbuildinfo",
-    "docs": "typedoc src",
-    "prepublishOnly": "npm run build",
-    "watch": "tsc -b --watch"
+    "build": "tsc -b"
   },
   "dependencies": {
     "@jupyter-notebook/application": "^7.0.0-alpha.12",
@@ -53,7 +32,6 @@
     "@lumino/widgets": "^2.0.0-beta.1"
   },
   "devDependencies": {
-    "rimraf": "^3.0.2",
     "typescript": "~4.9.3"
   },
   "publishConfig": {
