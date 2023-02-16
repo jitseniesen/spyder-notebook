@@ -2,5 +2,3 @@
 // Distributed under the terms of the Modified BSD License.
 
 export * from './app';
-export * from './shell';
-export * from './panelhandler';
