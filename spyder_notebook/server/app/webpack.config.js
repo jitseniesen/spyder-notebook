@@ -1,6 +1,9 @@
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 
+// Spyder changes:
+// - move output to different directory
+
 // Heavily inspired (and slightly tweaked) from:
 // https://github.com/jupyterlab/jupyterlab/blob/master/examples/federated/core_package/webpack.config.js
 
@@ -159,7 +162,8 @@ module.exports = [
     mode: 'development',
     entry: ['./publicpath.js', './' + path.relative(__dirname, entryPoint)],
     output: {
-      path: path.resolve(__dirname, '..', 'notebook/static/'),
+      // Spyder: directory below is changed
+      path: path.resolve(__dirname, '..', 'static/'),
       library: {
         type: 'var',
         name: ['_JUPYTERLAB', 'CORE_OUTPUT']
