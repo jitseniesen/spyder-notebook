@@ -1,14 +1,15 @@
-# -*- coding: utf-8 -*-
-# -----------------------------------------------------------------------------
-# Copyright (c) Spyder Project Contributors
-#
-# Licensed under the terms of the MIT License
-# -----------------------------------------------------------------------------
+from ._version import __version__  # noqa
 
-"""Spyder Notebook plugin."""
 
-# Local imports
-from spyder_notebook.notebookplugin import NotebookPlugin as PLUGIN_CLASS
-from spyder_notebook._version import __version__
+def _jupyter_server_extension_paths():
+    return [{"module": "spyder_notebook"}]
 
-PLUGIN_CLASS
+
+def _jupyter_server_extension_points():
+    from .app import JupyterNotebookApp
+
+    return [{"module": "spyder_notebook", "app": JupyterNotebookApp}]
+
+
+def _jupyter_labextension_paths():
+    return [{"src": "labextension", "dest": "@jupyter-notebook/lab-extension"}]

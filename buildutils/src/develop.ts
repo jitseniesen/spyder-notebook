@@ -29,7 +29,7 @@ commander
     const source = path.resolve(options.source ?? process.cwd());
     const sourceDir = path.join(
       source,
-      'notebook',
+      'spyder_notebook',
       'schemas',
       '@jupyter-notebook'
     );

@@ -3,7 +3,7 @@ requires = ["hatchling>=1.11", "jupyterlab>=4.0.0a34,<5"]
 build-backend = "hatchling.build"
 
 [project]
-name = "notebook"
+name = "spyder_notebook"
 description = "Jupyter Notebook - A web-based notebook environment for interactive computing"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -40,7 +40,7 @@ dependencies = [
 dynamic = ["version"]
 
 [project.scripts]
-jupyter-notebook = "notebook.app:main"
+jupyter-notebook = "spyder_notebook.app:main"
 
 [project.urls]
 Documentation = "https://jupyter-notebook.readthedocs.io/"
@@ -76,28 +76,28 @@ dev = [
 ]
 
 [tool.hatch.version]
-path = "notebook/_version.py"
+path = "spyder_notebook/_version.py"
 validate-bump = false
 
 [tool.hatch.build.targets.wheel.shared-data]
-"notebook/labextension" = "share/jupyter/labextensions/@jupyter-notebook/lab-extension"
-"notebook/schemas/@jupyter-notebook" = "share/jupyter/lab/schemas/@jupyter-notebook"
+"spyder_notebook/labextension" = "share/jupyter/labextensions/@jupyter-notebook/lab-extension"
+"spyder_notebook/schemas/@jupyter-notebook" = "share/jupyter/lab/schemas/@jupyter-notebook"
 "jupyter-config/jupyter_server_config.d" = "etc/jupyter/jupyter_server_config.d"
 "notebook.svg" = "share/icons/hicolor/scalable/apps/notebook.svg"
 "jupyter-notebook.desktop" = "share/applications/jupyter-notebook.desktop"
 
 [tool.hatch.build.targets.sdist]
 artifacts = [
-    "notebook/labextension",
-    "notebook/static",
-    "notebook/schemas/@jupyter-notebook",
-    "notebook/templates",
+    "spyder_notebook/labextension",
+    "spyder_notebook/static",
+    "spyder_notebook/schemas/@jupyter-notebook",
+    "spyder_notebook/templates",
     "notebook.svg",
     "jupyter-notebook.desktop",
 ]
 include = [
     "/jupyter-config",
-    "/notebook",
+    "/spyder_notebook",
     "/tests",
     "/package.json",
     "/install.json",
@@ -107,10 +107,10 @@ include = [
 
 [tool.hatch.build.targets.wheel]
 artifacts = [
-    "notebook/static",
-    "notebook/templates",
+    "spyder_notebook/static",
+    "spyder_notebook/templates",
 ]
-include = ["/notebook"]
+include = ["/spyder_notebook"]
 
 [tool.hatch.envs.docs]
 features = ["docs"]
@@ -131,14 +131,14 @@ nowarn = "test -W default {args}"
 features = ["test"]
 dependencies = ["coverage", "pytest-cov"]
 [tool.hatch.envs.cov.scripts]
-test = "python -m pytest -vv --cov notebook --cov-branch --cov-report term-missing:skip-covered {args}"
+test = "python -m pytest -vv --cov spyder_notebook --cov-branch --cov-report term-missing:skip-covered {args}"
 nowarn = "test -W default {args}"
 
 [tool.hatch.envs.typing]
 features = ["test"]
 dependencies = ["mypy>=0.990"]
 [tool.hatch.envs.typing.scripts]
-test = "mypy --install-types --non-interactive {args:notebook tests}"
+test = "mypy --install-types --non-interactive {args:spyder_notebook tests}"
 
 [tool.hatch.envs.lint]
 dependencies = [
@@ -164,8 +164,8 @@ fmt = [
 dependencies = ["hatch-jupyter-builder>=0.2"]
 build-function = "hatch_jupyter_builder.npm_builder"
 ensured-targets = [
-    "notebook/labextension/static/style.js",
-    "notebook/static/bundle.js"
+    "spyder_notebook/labextension/static/style.js",
+    "spyder_notebook/static/bundle.js"
 ]
 install-pre-commit-hook = true
 
@@ -173,7 +173,7 @@ install-pre-commit-hook = true
 build_cmd = "build:prod"
 editable_build_cmd = "build"
 source_dir = "packages"
-build_dir = "notebook/static"
+build_dir = "spyder_notebook/static"
 npm = "jlpm"
 
 [tool.jupyter-releaser.options]

@@ -209,7 +209,7 @@ aliases = dict(base_aliases)
 class JupyterNotebookApp(NotebookConfigShimMixin, LabServerApp):
     """The notebook server extension app."""
 
-    name = "notebook"
+    name = "spyder_notebook"
     app_name = "Jupyter Notebook"
     description = "Jupyter Notebook - A web-based notebook environment for interactive computing"
     version = version
