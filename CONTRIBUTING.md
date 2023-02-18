@@ -1,99 +1,142 @@
-# Contributing to the Spyder notebook plugin
+# Contributing to Jupyter Notebook
 
-:+1::tada: 
-First off, thanks for taking the time to contribute to the Spyder notebook
-plugin! 
-:tada::+1:
+Thanks for contributing to Jupyter Notebook!
 
-## General guidelines for contributing
-
-The Spyder notebook plugin is developed as part of the wider Spyder project.
-In general, the guidelines for contributing to Spyder also apply here.
-Specifically, all contributors are expected to abide by
-[Spyder's Code of Conduct](https://github.com/spyder-ide/spyder/blob/master/CODE_OF_CONDUCT.md).
-
-There are many ways to contribute and all are valued and welcome. 
-You can help other users, write documentation, spread the word, submit
-helpful issues on the
-[issue tracker](https://github.com/spyder-ide/spyder-notebook/issues)
-with problems you encounter or ways to improve the plugin, test the development
-version, or submit a pull request on GitHub.
-
-The rest of this document explains how to set up a development environment.
+Make sure to follow [Project Jupyter's Code of Conduct](https://github.com/jupyter/governance/blob/master/conduct/code_of_conduct.md)
+for a friendly and welcoming collaborative environment.
 
 ## Setting up a development environment
 
-This section explains how to set up a conda environment to run and work on the
-development version of the Spyder notebook plugin.
+Note: You will need NodeJS to build the extension package.
 
-### Creating a conda environment
+The `jlpm` command is JupyterLab's pinned version of [yarn](https://yarnpkg.com/) that is installed with JupyterLab. You may use
+`yarn` or `npm` in lieu of `jlpm` below.
 
-This creates a new conda environment with the name `spydernb-dev`.
-
-```bash
-$ conda create -n spydernb-dev python=3.7
-$ conda activate spydernb-dev
-```
-
-### Cloning the repository
-
-This creates a new directory `spyder-notebook` with the source code of the
-Spyder notebook plugin.
+**Note**: we recomment using `mamba` to speed the creating of the environment.
 
 ```bash
-$ git clone https://github.com/spyder-ide/spyder-notebook.git
-$ cd spyder-notebook
+# create a new environment
+mamba create -n notebook -c conda-forge python nodejs -y
+
+# activate the environment
+mamba activate notebook
+
+# Install package in development mode
+pip install -e ".[dev,test]"
+
+# Link the notebook extension and @jupyter-notebook schemas
+jlpm develop
+
+# Enable the server extension
+jupyter server extension enable notebook
 ```
 
-### Installing dependencies
-
-This installs Spyder, JupyterLab and all other dependencies of the plugin into
-the conda environment.
+`notebook` follows a monorepo structure. To build all the packages at once:
 
 ```bash
-$ conda install --file requirements/conda.txt
+jlpm build
 ```
 
-### Building the notebook server
-
-The Spyder notebook plugin includes a server which serves notebooks as HTML
-pages. The following commands install the JavaScript dependencies of the
-notebook server and build the server.
+There is also a `watch` script to watch for changes and rebuild the app automatically:
 
 ```bash
-$ cd spyder_notebook/server
-$ jlpm install
-$ jlpm build
-$ cd ../..
+jlpm watch
 ```
 
-### Installing the plugin
-
-This installs the Spyder notebook plugin so that Spyder will use it.
+To make sure the `notebook` server extension is installed:
 
 ```bash
-$ pip install --no-deps -e .
+$ jupyter server extension list
+Config dir: /home/username/.jupyter
+
+Config dir: /home/username/miniforge3/envs/notebook/etc/jupyter
+    jupyterlab enabled
+    - Validating jupyterlab...
+      jupyterlab 3.0.0 OK
+    notebook enabled
+    - Validating notebook...
+      notebook 7.0.0a0 OK
+
+Config dir: /usr/local/etc/jupyter
 ```
 
-### Running Spyder
-
-You are done! You can run Spyder as normal and it should load the notebook
-plugin.
+Then start Jupyter Notebook with:
 
 ```bash
-$ spyder
+jupyter notebook
 ```
 
-### Running Tests
+## Running Tests
 
-This command installs the test dependencies in the conda environment.
+To run the tests:
 
 ```bash
-$ conda install -c spyder-ide --file requirements/tests.txt
+jlpm run build:test
+jlpm run test
 ```
 
-You can now run the tests with a simple
+There are also end to end tests to cover higher level user interactions, located in the `ui-tests` folder. To run these tests:
 
 ```bash
-$ pytest
+cd ui-tests
+# start a new Jupyter server in a terminal
+jlpm start
+
+# in a new terminal, run the tests
+jlpm test
 ```
+
+The `test` script calls the Playwright test runner. You can pass additional arguments to `playwright` by appending parameters to the command. For example to run the test in headed mode, `jlpm test --headed`.
+
+Checkout the [Playwright Command Line Reference](https://playwright.dev/docs/test-cli/) for more information about the available command line options.
+
+Running the end to end tests in headful mode will trigger something like the following:
+
+![playwight-headed-demo](https://user-images.githubusercontent.com/591645/141274633-ca9f9c2f-eef6-430e-9228-a35827f8133d.gif)
+
+## Code Styling
+
+All non-python source code is formatted using [prettier](https://prettier.io) and python source code is formatted using [black](https://github.com/psf/black)s
+When code is modified and committed, all staged files will be
+automatically formatted using pre-commit git hooks (with help from
+[pre-commit](https://github.com/pre-commit/pre-commit). The benefit of
+using a code formatters like `prettier` and `black` is that it removes the topic of
+code style from the conversation when reviewing pull requests, thereby
+speeding up the review process.
+
+As long as your code is valid,
+the pre-commit hook should take care of how it should look.
+`pre-commit` and its associated hooks will automatically be installed when
+you run `pip install -e ".[dev,test]"`
+
+To install `pre-commit` manually, run the following:
+
+```shell
+pip install pre-commit
+pre-commit install
+```
+
+You can invoke the pre-commit hook by hand at any time with:
+
+```shell
+pre-commit run
+```
+
+which should run any autoformatting on your code
+and tell you about any errors it couldn't fix automatically.
+You may also install [black integration](https://github.com/psf/black#editor-integration)
+into your text editor to format code automatically.
+
+If you have already committed files before setting up the pre-commit
+hook with `pre-commit install`, you can fix everything up using
+`pre-commit run --all-files`. You need to make the fixing commit
+yourself after that.
+
+You may also use the prettier npm script (e.g. `npm run prettier` or
+`yarn prettier` or `jlpm prettier`) to format the entire code base.
+We recommend installing a prettier extension for your code editor and
+configuring it to format your code with a keyboard shortcut or
+automatically on save.
+
+Some of the hooks only run on CI by default, but you can invoke them by
+running with the `--hook-stage manual` argument.

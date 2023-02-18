@@ -1,38 +1,40 @@
-To release a new version of Spyder notebook on PyPI:
+# Releasing Jupyter Notebook
 
-* Create an issue announcing the incoming release
+## Using `jupyter_releaser`
 
-* Close the respective milestone in GitHub
+The recommended way to make a release is to use [`jupyter_releaser`](https://jupyter-releaser.readthedocs.io/en/latest/get_started/making_release_from_repo.html).
 
-* git checkout master
+## Manual Release
 
-* git fetch upstream && get merge upstream/master
+To create a manual release, perform the following steps:
 
-* git clean -xfdi
+### Set up
 
-* Update CHANGELOG.md with loghub
+```bash
+pip install hatch twine
+git pull origin $(git branch --show-current)
+git clean -dffx
+```
 
-* Update `_version.py` (set release version, remove 'dev0')
+### Update the version and apply the tag
 
-* git add . && git commit -m 'Release X.X.X'
+```bash
+echo "Enter new version"
+read new_version
+hatch version ${new_version}
+git tag -a ${new_version} -m "Release ${new_version}"
+```
 
-* python setup.py sdist
+### Build the artifacts
 
-* python setup.py bdist_wheel
+```bash
+rm -rf dist
+hatch build
+```
 
-* twine check dist/*
+### Publish the artifacts to pypi
 
-* twine upload dist/*
-
-* git tag -a vX.X.X -m 'Release X.X.X'
-
-* Update `_version.py` (add 'dev0' and increment minor)
-
-* git add . && git commit -m 'Back to work'
-
-* git push upstream master && git push upstream --tags
-
-* Publish release announcement
-
-* **Note**: Before using these commands be sure that the distribution is complete 
-i.e all the needed files are in the tarball for uploading.
+```bash
+twine check dist/*
+twine upload dist/*
+```

@@ -1,83 +1,108 @@
-# Spyder notebook plugin
+# Jupyter Notebook
 
+![Github Actions Status](https://github.com/jupyter/notebook/workflows/Build/badge.svg)
+[![Documentation Status](https://readthedocs.org/projects/jupyter-notebook/badge/?version=latest)](https://jupyter-notebook.readthedocs.io/en/latest/?badge=latest)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jupyter/notebook/main?urlpath=tree)
+[![codecov](https://codecov.io/gh/jupyter/notebook/branch/main/graph/badge.svg)](https://codecov.io/gh/jupyter/notebook)
 
-Spyder plugin to use Jupyter notebooks inside Spyder. Currently it supports
-basic functionality such as creating new notebooks, opening any notebook in
-your filesystem and saving notebooks at any location.
+The Jupyter notebook is a web-based notebook environment for interactive
+computing.
 
-You can also use Spyder's file switcher to easily switch between notebooks
-and open an IPython console connected to the kernel of a notebook to inspect
-its variables in the Variable Explorer.
+![Jupyter notebook example](docs/resources/running_code_med.png 'Jupyter notebook example')
 
-## Project details
+## Maintained versions
 
-![license](https://img.shields.io/pypi/l/spyder-notebook.svg)
-[![conda version](https://img.shields.io/conda/v/spyder-ide/spyder-notebook.svg)](https://www.anaconda.com/download/)
-[![download count](https://img.shields.io/conda/d/spyder-ide/spyder-notebook.svg)](https://www.anaconda.com/download/)
-[![pypi version](https://img.shields.io/pypi/v/spyder-notebook.svg)](https://pypi.python.org/pypi/spyder-notebook)
-[![Join the chat at https://gitter.im/spyder-ide/public](https://badges.gitter.im/spyder-ide/spyder.svg)](https://gitter.im/spyder-ide/public)
-[![OpenCollective Backers](https://opencollective.com/spyder/backers/badge.svg?color=blue)](#backers)
-[![OpenCollective Sponsors](https://opencollective.com/spyder/sponsors/badge.svg?color=blue)](#sponsors)
+We maintain the **two most recently released major versions of Jupyter Notebook**, Notebook v5 and Classic Notebook v6. After Notebook v7.0 is released, we will no longer maintain Notebook v5. All Notebook v5 users are strongly advised to upgrade to Classic Notebook v6 as soon as possible.
 
-## Build status
+The Jupyter Notebook project is currently undertaking a transition to a more modern code base built from the ground-up using JupyterLab components and extensions.
 
-[![Windows status](https://github.com/spyder-ide/spyder-notebook/workflows/Windows%20tests/badge.svg)](https://github.com/spyder-ide/spyder-notebook/actions?query=workflow%3A%22Windows+tests%22)
-[![Linux status](https://github.com/spyder-ide/spyder-notebook/workflows/Linux%20tests/badge.svg)](https://github.com/spyder-ide/spyder-notebook/actions?query=workflow%3A%22Linux+tests%22)
-[![MacOS status](https://github.com/spyder-ide/spyder-notebook/workflows/Macos%20tests/badge.svg)](https://github.com/spyder-ide/spyder-notebook/actions?query=workflow%3A%22Macos+tests%22)
-[![codecov](https://codecov.io/gh/spyder-ide/spyder-notebook/branch/master/graph/badge.svg)](https://codecov.io/gh/spyder-ide/spyder-notebook/branch/master)
-[![Crowdin](https://badges.crowdin.net/spyder-notebook/localized.svg)](https://crowdin.com/project/spyder-notebook)
+There is new stream of work which was submitted and then accepted as a Jupyter Enhancement Proposal (JEP) as part of the next version (v7): https://jupyter.org/enhancement-proposals/79-notebook-v7/notebook-v7.html
 
+There is also a plan to continue maintaining Notebook v6 with bug and security fixes only, to ease the transition to Notebook v7: https://github.com/jupyter/notebook-team-compass/issues/5#issuecomment-1085254000
+
+### Notebook v7
+
+The next major version of Notebook will be based on:
+
+- JupyterLab components for the frontend
+- Jupyter Server for the Python server
+
+This represents a significant change to the `jupyter/notebook` code base.
+
+To learn more about Notebook v7: https://jupyter.org/enhancement-proposals/79-notebook-v7/notebook-v7.html
+
+### Classic Notebook v6
+
+Maintainance and security-related issues are now being addressed in the [`6.4.x`](https://github.com/jupyter/notebook/tree/6.4.x) branch.
+
+A `6.5.x` branch will be soon created and will depend on [`nbclassic`](https://github.com/jupyter/nbclassic) for the HTML/JavaScript/CSS assets.
+
+New features and continuous improvement is now focused on Notebook v7 (see section above).
+
+If you have an open pull request with a new feature or if you were planning to open one, we encourage switching over to the Jupyter Server and JupyterLab architecture, and distribute it as a server extension and / or JupyterLab prebuilt extension. That way your new feature will also be compatible with the new Notebook v7.
+
+## Jupyter notebook, the language-agnostic evolution of IPython notebook
+
+Jupyter notebook is a language-agnostic HTML notebook application for
+Project Jupyter. In 2015, Jupyter notebook was released as a part of
+The Big Split™ of the IPython codebase. IPython 3 was the last major monolithic
+release containing both language-agnostic code, such as the _IPython notebook_,
+and language specific code, such as the _IPython kernel for Python_. As
+computing spans across many languages, Project Jupyter will continue to develop the
+language-agnostic **Jupyter notebook** in this repo and with the help of the
+community develop language specific kernels which are found in their own
+discrete repos.
+
+- [The Big Split™ announcement](https://blog.jupyter.org/the-big-split-9d7b88a031a7)
+- [Jupyter Ascending blog post](https://blog.jupyter.org/jupyter-ascending-1bf5b362d97e)
 
 ## Installation
 
-To install this plugin, you can use either ``pip`` or ``conda`` package managers, as follows:
+You can find the installation documentation for the
+[Jupyter platform, on ReadTheDocs](https://jupyter.readthedocs.io/en/latest/install.html).
+The documentation for advanced usage of Jupyter notebook can be found
+[here](https://jupyter-notebook.readthedocs.io/en/latest/).
 
-Using conda (the recommended way!):
+For a local installation, make sure you have
+[pip installed](https://pip.readthedocs.io/en/stable/installing/) and run:
 
-```
-conda install spyder-notebook -c conda-forge
-```
-
-Using pip:
-
-```
-pip install spyder-notebook
+```bash
+pip install notebook
 ```
 
-**Note**: At the moment it is not possible to use this plugin with the [Spyder installers](http://docs.spyder-ide.org/current/installation.html#standalone-installers) for Windows and macOS. We're working to make that a reality in the future.
+## Usage - Running Jupyter notebook
 
-## Dependencies
+### Running in a local installation
 
-This project depends on:
+Launch with:
 
-* [Spyder](https://github.com/spyder-ide/spyder) (version 5.x)
-* [Notebook](https://github.com/jupyter/notebook) (version 4.3 or later)
+```bash
+jupyter notebook
+```
 
+### Running in a remote installation
 
-## Changelog
-Visit our [CHANGELOG](CHANGELOG.md) file to know more about our new features and improvements.
+You need some configuration before starting Jupyter notebook remotely. See [Running a notebook server](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html).
 
-## Development and contribution
+## Development Installation
 
-See the 
-[Contributing Guide](CONTRIBUTING.md)
-for information on how to contribute to the Spyder notebook plugin, including
-instructions for setting up a development environment.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to set up a local development installation.
 
-## Contact
+## Contributing
 
-You can ask your questions at the [Spyder group](https://groups.google.com/forum/?utm_source=digest&utm_medium=email#!forum/spyderlib/topics)
-or create a issue in this repo. We will be more than glad to answer.
+If you are interested in contributing to the project, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-## Overview
-![example](https://raw.githubusercontent.com/spyder-ide/spyder-notebook/master/doc/example.gif)
+## Community Guidelines and Code of Conduct
 
-## Sponsors
+This repository is a Jupyter project and follows the Jupyter
+[Community Guides and Code of Conduct](https://jupyter.readthedocs.io/en/latest/community/content-community.html).
 
-Spyder and its subprojects are funded thanks to the generous support of
+## Resources
 
-[![Quansight](https://static.wixstatic.com/media/095d2c_2508c560e87d436ea00357abc404cf1d~mv2.png/v1/crop/x_0,y_9,w_915,h_329/fill/w_380,h_128,al_c,usm_0.66_1.00_0.01/095d2c_2508c560e87d436ea00357abc404cf1d~mv2.png)](https://www.quansight.com/)[![Numfocus](https://i2.wp.com/numfocus.org/wp-content/uploads/2017/07/NumFocus_LRG.png?fit=320%2C148&ssl=1)](https://numfocus.org/)
-
-and the donations we have received from our users around the world through [Open Collective](https://opencollective.com/spyder/):
-
-[![Sponsors](https://opencollective.com/spyder/sponsors.svg)](https://opencollective.com/spyder#support)
+- [Project Jupyter website](https://jupyter.org)
+- [Online Demo at jupyter.org/try](https://jupyter.org/try)
+- [Documentation for Jupyter notebook](https://jupyter-notebook.readthedocs.io/en/latest/)
+- [Korean Version of Installation](https://github.com/ChungJooHo/Jupyter_Kor_doc/)
+- [Documentation for Project Jupyter](https://jupyter.readthedocs.io/en/latest/index.html) \[[PDF](https://media.readthedocs.org/pdf/jupyter/latest/jupyter.pdf)\]
+- [Issues](https://github.com/jupyter/notebook/issues)
+- [Technical support - Jupyter Google Group](https://discourse.jupyter.org/)
