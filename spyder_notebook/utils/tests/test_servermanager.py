@@ -97,8 +97,8 @@ def test_start_server(mocker, dark, under_home):
 
     mock_QProcess.return_value.start.assert_called_once()
     args = mock_QProcess.return_value.start.call_args[0]
-    import spyder_notebook.server.main
-    assert args[1][0] == spyder_notebook.server.main.__file__
+    import spyder_notebook.app
+    assert args[1][0] == spyder_notebook.app.__file__
     assert '--notebook-dir={}'.format(nbdir) in args[1]
     # assert ('--dark' in args[1]) == dark
     assert '--dark' not in args[1]
