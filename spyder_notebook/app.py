@@ -193,7 +193,7 @@ class FileHandler(NotebookBaseHandler):
         return self.write(tpl)
 
 
-class NotebookHandler(NotebookBaseHandler):
+class SpyderNotebookHandler(NotebookBaseHandler):
     """A notebook page handler."""
 
     @web.authenticated
@@ -210,13 +210,13 @@ class JupyterNotebookApp(NotebookConfigShimMixin, LabServerApp):
     """The notebook server extension app."""
 
     name = "spyder_notebook"
-    app_name = "Jupyter Notebook"
-    description = "Jupyter Notebook - A web-based notebook environment for interactive computing"
+    app_name = "Spyder/Jupyter Notebook"
+    description = "Spyder/Jupyter Notebook - A version of Jupyter Notebook for use in Spyder"
     version = version
     app_version = version
     extension_url = "/"
     default_url = "/tree"  # type:ignore
-    file_url_prefix = "/notebooks"
+    file_url_prefix = "/spyder-notebooks"
     load_other_extensions = True
     app_dir = app_dir
     subcommands: dict = {}
@@ -272,7 +272,7 @@ class JupyterNotebookApp(NotebookConfigShimMixin, LabServerApp):
         )
         self.handlers.append(("/?", RedirectHandler))
         self.handlers.append(("/tree(.*)", TreeHandler))
-        self.handlers.append(("/notebooks(.*)", NotebookHandler))
+        self.handlers.append(("/spyder-notebooks(.*)", SpyderNotebookHandler))
         self.handlers.append(("/edit(.*)", FileHandler))
         self.handlers.append(("/consoles/(.*)", ConsoleHandler))
         self.handlers.append(("/terminals/(.*)", TerminalHandler))
