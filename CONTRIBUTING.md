@@ -24,7 +24,7 @@ mamba activate notebook
 # Install package in development mode
 pip install -e ".[dev,test]"
 
-# Link the notebook extension and @jupyter-notebook schemas
+# Link the notebook extension and @spyder-notebook schemas
 jlpm develop
 
 # Enable the server extension

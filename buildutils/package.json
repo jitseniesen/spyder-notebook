@@ -1,5 +1,5 @@
 {
-  "name": "@jupyter-notebook/buildutils",
+  "name": "@spyder-notebook/buildutils",
   "version": "7.0.0-alpha.13",
   "private": true,
   "description": "Jupyter Notebook - Build Utilities",

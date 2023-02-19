@@ -5,7 +5,7 @@ import {
   INotebookShell,
   NotebookShell,
   Shell
-} from '@jupyter-notebook/application';
+} from '@spyder-notebook/application';
 
 import { JupyterFrontEnd } from '@jupyterlab/application';
 

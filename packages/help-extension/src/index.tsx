@@ -12,7 +12,7 @@ import { IMainMenu } from '@jupyterlab/mainmenu';
 
 import { ITranslator } from '@jupyterlab/translation';
 
-import { jupyterIcon } from '@jupyter-notebook/ui-components';
+import { jupyterIcon } from '@spyder-notebook/ui-components';
 
 import * as React from 'react';
 
@@ -45,7 +45,7 @@ namespace CommandIDs {
  * A plugin to open the about section with resources.
  */
 const open: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/help-extension:open',
+  id: '@spyder-notebook/help-extension:open',
   autoStart: true,
   activate: (app: JupyterFrontEnd): void => {
     const { commands } = app;
@@ -64,7 +64,7 @@ const open: JupyterFrontEndPlugin<void> = {
  * Plugin to add a command to show an About Jupyter Notebook and Markdown Reference.
  */
 const about: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/help-extension:about',
+  id: '@spyder-notebook/help-extension:about',
   autoStart: true,
   requires: [ITranslator],
   optional: [IMainMenu, ICommandPalette],
@@ -160,7 +160,7 @@ const about: JupyterFrontEndPlugin<void> = {
  * A plugin to add a command to display Keyboard Shortcuts.
  */
 const shortcuts: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/help-extension:shortcuts',
+  id: '@spyder-notebook/help-extension:shortcuts',
   autoStart: true,
   requires: [ITranslator],
   optional: [ICommandPalette],

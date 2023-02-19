@@ -1,5 +1,5 @@
 {
-  "name": "@jupyter-notebook/ui-tests",
+  "name": "@spyder-notebook/ui-tests",
   "private": true,
   "version": "0.1.0",
   "author": "Project Jupyter",

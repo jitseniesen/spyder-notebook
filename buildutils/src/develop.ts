@@ -31,7 +31,7 @@ commander
       source,
       'spyder_notebook',
       'schemas',
-      '@jupyter-notebook'
+      '@spyder-notebook'
     );
     const destDir = path.join(
       prefix,
@@ -39,7 +39,7 @@ commander
       'jupyter',
       'lab',
       'schemas',
-      '@jupyter-notebook'
+      '@spyder-notebook'
     );
     if (overwrite) {
       try {

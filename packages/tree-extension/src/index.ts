@@ -34,7 +34,7 @@ import {
 
 import { Menu, MenuBar } from '@lumino/widgets';
 
-import { NotebookTreeWidget, INotebookTree } from '@jupyter-notebook/tree';
+import { NotebookTreeWidget, INotebookTree } from '@spyder-notebook/tree';
 
 /**
  * The file browser factory.
@@ -59,7 +59,7 @@ namespace CommandIDs {
  * new notebooks, files, consoles and terminals
  */
 const createNew: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/tree-extension:new',
+  id: '@spyder-notebook/tree-extension:new',
   requires: [ITranslator],
   optional: [IToolbarWidgetRegistry],
   autoStart: true,
@@ -108,7 +108,7 @@ const createNew: JupyterFrontEndPlugin<void> = {
  * A plugin to add file browser commands for the tree view.
  */
 const openFileBrowser: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/tree-extension:open-file-browser',
+  id: '@spyder-notebook/tree-extension:open-file-browser',
   requires: [INotebookTree, IDefaultFileBrowser],
   autoStart: true,
   activate: (
@@ -129,7 +129,7 @@ const openFileBrowser: JupyterFrontEndPlugin<void> = {
  * A plugin to add the file browser widget to an INotebookShell
  */
 const notebookTreeWidget: JupyterFrontEndPlugin<INotebookTree> = {
-  id: '@jupyter-notebook/tree-extension:widget',
+  id: '@spyder-notebook/tree-extension:widget',
   requires: [
     IDefaultFileBrowser,
     ITranslator,

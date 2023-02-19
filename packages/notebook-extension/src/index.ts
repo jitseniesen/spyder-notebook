@@ -28,7 +28,7 @@ import { ISettingRegistry } from '@jupyterlab/settingregistry';
 
 import { ITranslator } from '@jupyterlab/translation';
 
-import { INotebookShell } from '@jupyter-notebook/application';
+import { INotebookShell } from '@spyder-notebook/application';
 
 import { Poll } from '@lumino/polling';
 
@@ -63,7 +63,7 @@ const SCROLLED_OUTPUTS_CLASS = 'jp-mod-outputsScrolled';
  * A plugin for the checkpoint indicator
  */
 const checkpoints: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/notebook-extension:checkpoints',
+  id: '@spyder-notebook/notebook-extension:checkpoints',
   autoStart: true,
   requires: [IDocumentManager, ITranslator],
   optional: [INotebookShell, IToolbarWidgetRegistry],
@@ -128,7 +128,7 @@ const checkpoints: JupyterFrontEndPlugin<void> = {
  * The kernel logo plugin.
  */
 const kernelLogo: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/notebook-extension:kernel-logo',
+  id: '@spyder-notebook/notebook-extension:kernel-logo',
   autoStart: true,
   requires: [INotebookShell],
   optional: [IToolbarWidgetRegistry],
@@ -191,7 +191,7 @@ const kernelLogo: JupyterFrontEndPlugin<void> = {
  * A plugin to display the kernel status;
  */
 const kernelStatus: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/notebook-extension:kernel-status',
+  id: '@spyder-notebook/notebook-extension:kernel-status',
   autoStart: true,
   requires: [INotebookShell, ITranslator],
   activate: (
@@ -255,7 +255,7 @@ const kernelStatus: JupyterFrontEndPlugin<void> = {
  * https://github.com/jupyter/notebook/blob/a9a31c096eeffe1bff4e9164c6a0442e0e13cdb3/notebook/static/notebook/js/outputarea.js#L96-L120
  */
 const scrollOutput: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/notebook-extension:scroll-output',
+  id: '@spyder-notebook/notebook-extension:scroll-output',
   autoStart: true,
   requires: [INotebookTracker],
   optional: [ISettingRegistry],
@@ -340,7 +340,7 @@ const scrollOutput: JupyterFrontEndPlugin<void> = {
  * A plugin to add the NotebookTools to the side panel;
  */
 const notebookToolsWidget: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/notebook-extension:notebook-tools',
+  id: '@spyder-notebook/notebook-extension:notebook-tools',
   autoStart: true,
   requires: [INotebookShell],
   optional: [INotebookTools],

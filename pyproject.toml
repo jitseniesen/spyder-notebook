@@ -80,8 +80,8 @@ path = "spyder_notebook/_version.py"
 validate-bump = false
 
 [tool.hatch.build.targets.wheel.shared-data]
-"spyder_notebook/labextension" = "share/jupyter/labextensions/@jupyter-notebook/lab-extension"
-"spyder_notebook/schemas/@jupyter-notebook" = "share/jupyter/lab/schemas/@jupyter-notebook"
+"spyder_notebook/labextension" = "share/jupyter/labextensions/@spyder-notebook/lab-extension"
+"spyder_notebook/schemas/@spyder-notebook" = "share/jupyter/lab/schemas/@spyder-notebook"
 "jupyter-config/jupyter_server_config.d" = "etc/jupyter/jupyter_server_config.d"
 "notebook.svg" = "share/icons/hicolor/scalable/apps/notebook.svg"
 "jupyter-notebook.desktop" = "share/applications/jupyter-notebook.desktop"
@@ -90,7 +90,7 @@ validate-bump = false
 artifacts = [
     "spyder_notebook/labextension",
     "spyder_notebook/static",
-    "spyder_notebook/schemas/@jupyter-notebook",
+    "spyder_notebook/schemas/@spyder-notebook",
     "spyder_notebook/templates",
     "notebook.svg",
     "jupyter-notebook.desktop",

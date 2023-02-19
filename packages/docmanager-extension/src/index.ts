@@ -19,7 +19,7 @@ import { Signal } from '@lumino/signaling';
  *
  */
 const opener: JupyterFrontEndPlugin<IDocumentWidgetOpener> = {
-  id: '@jupyter-notebook/docmanager-extension:opener',
+  id: '@spyder-notebook/docmanager-extension:opener',
   autoStart: true,
   provides: IDocumentWidgetOpener,
   activate: (app: JupyterFrontEnd) => {

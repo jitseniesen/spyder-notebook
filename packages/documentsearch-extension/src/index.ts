@@ -7,7 +7,7 @@ import { ISearchProviderRegistry } from '@jupyterlab/documentsearch';
 
 import { Widget } from '@lumino/widgets';
 
-import { INotebookShell } from '@jupyter-notebook/application';
+import { INotebookShell } from '@spyder-notebook/application';
 
 const SEARCHABLE_CLASS = 'jp-mod-searchable';
 
@@ -15,7 +15,7 @@ const SEARCHABLE_CLASS = 'jp-mod-searchable';
  * A plugin to add document search functionalities.
  */
 const notebookShellWidgetListener: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/documentsearch-extension:notebookShellWidgetListener',
+  id: '@spyder-notebook/documentsearch-extension:notebookShellWidgetListener',
   requires: [INotebookShell, ISearchProviderRegistry],
   autoStart: true,
   activate: (

@@ -1,5 +1,5 @@
 {
-  "name": "@jupyter-notebook/root",
+  "name": "@spyder-notebook/root",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://github.com/jupyter/notebook",
@@ -39,8 +39,8 @@
     "test": "lerna run test",
     "update:dependency": "node ./node_modules/@jupyterlab/buildutils/lib/update-dependency.js --lerna",
     "watch": "run-p watch:lib watch:app",
-    "watch:app": "lerna exec --stream --scope \"@jupyter-notebook/app\" jlpm watch",
-    "watch:lib": "lerna exec --stream --scope @jupyter-notebook/metapackage jlpm watch"
+    "watch:app": "lerna exec --stream --scope \"@spyder-notebook/app\" jlpm watch",
+    "watch:lib": "lerna exec --stream --scope @spyder-notebook/metapackage jlpm watch"
   },
   "devDependencies": {
     "@jupyterlab/buildutils": "^4.0.0-alpha.19",

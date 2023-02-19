@@ -17,7 +17,7 @@ import { ITranslator } from '@jupyterlab/translation';
 
 import { Menu, MenuBar } from '@lumino/widgets';
 
-import { INotebookShell } from '@jupyter-notebook/application';
+import { INotebookShell } from '@spyder-notebook/application';
 
 /**
  * The command IDs used by the application plugin.
@@ -50,7 +50,7 @@ interface ISwitcherChoice {
  * A plugin to add custom toolbar items to the notebook page
  */
 const launchButtons: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/lab-extension:interface-switcher',
+  id: '@spyder-notebook/lab-extension:interface-switcher',
   autoStart: true,
   requires: [ITranslator],
   optional: [
@@ -148,7 +148,7 @@ const launchButtons: JupyterFrontEndPlugin<void> = {
  * A plugin to add a command to open the Jupyter Notebook Tree.
  */
 const launchNotebookTree: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/lab-extension:launch-tree',
+  id: '@spyder-notebook/lab-extension:launch-tree',
   autoStart: true,
   requires: [ITranslator],
   optional: [ICommandPalette],

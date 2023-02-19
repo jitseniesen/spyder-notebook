@@ -16,7 +16,7 @@ import { PanelHandler, SidePanelHandler } from './panelhandler';
  * The Jupyter Notebook application shell token.
  */
 export const INotebookShell = new Token<INotebookShell>(
-  '@jupyter-notebook/application:INotebookShell'
+  '@spyder-notebook/application:INotebookShell'
 );
 
 /**

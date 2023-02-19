@@ -1,5 +1,5 @@
 {
-  "name": "@jupyter-notebook/tree-extension",
+  "name": "@spyder-notebook/tree-extension",
   "version": "7.0.0-alpha.13",
   "description": "Jupyter Notebook - Tree Extension",
   "homepage": "https://github.com/jupyter/notebook",
@@ -39,8 +39,8 @@
     "watch": "tsc -b --watch"
   },
   "dependencies": {
-    "@jupyter-notebook/application": "^7.0.0-alpha.13",
-    "@jupyter-notebook/tree": "^7.0.0-alpha.13",
+    "@spyder-notebook/application": "^7.0.0-alpha.13",
+    "@spyder-notebook/tree": "^7.0.0-alpha.13",
     "@jupyterlab/application": "^4.0.0-alpha.19",
     "@jupyterlab/apputils": "^4.0.0-alpha.19",
     "@jupyterlab/coreutils": "^6.0.0-alpha.19",

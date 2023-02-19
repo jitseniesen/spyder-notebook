@@ -1,5 +1,5 @@
 {
-  "name": "@jupyter-notebook/metapackage",
+  "name": "@spyder-notebook/metapackage",
   "version": "7.0.0-alpha.13",
   "private": true,
   "description": "Jupyter Notebook - Metapackage",
@@ -20,18 +20,18 @@
     "watch": "tsc -b -w --preserveWatchOutput"
   },
   "dependencies": {
-    "@jupyter-notebook/application": "file:../application",
-    "@jupyter-notebook/application-extension": "file:../application-extension",
-    "@jupyter-notebook/console-extension": "file:../console-extension",
-    "@jupyter-notebook/docmanager-extension": "file:../docmanager-extension",
-    "@jupyter-notebook/documentsearch-extension": "file:../documentsearch-extension",
-    "@jupyter-notebook/help-extension": "file:../help-extension",
-    "@jupyter-notebook/lab-extension": "file:../lab-extension",
-    "@jupyter-notebook/notebook-extension": "file:../notebook-extension",
-    "@jupyter-notebook/terminal-extension": "file:../terminal-extension",
-    "@jupyter-notebook/tree": "file:../tree",
-    "@jupyter-notebook/tree-extension": "file:../tree-extension",
-    "@jupyter-notebook/ui-components": "file:../ui-components"
+    "@spyder-notebook/application": "file:../application",
+    "@spyder-notebook/application-extension": "file:../application-extension",
+    "@spyder-notebook/console-extension": "file:../console-extension",
+    "@spyder-notebook/docmanager-extension": "file:../docmanager-extension",
+    "@spyder-notebook/documentsearch-extension": "file:../documentsearch-extension",
+    "@spyder-notebook/help-extension": "file:../help-extension",
+    "@spyder-notebook/lab-extension": "file:../lab-extension",
+    "@spyder-notebook/notebook-extension": "file:../notebook-extension",
+    "@spyder-notebook/terminal-extension": "file:../terminal-extension",
+    "@spyder-notebook/tree": "file:../tree",
+    "@spyder-notebook/tree-extension": "file:../tree-extension",
+    "@spyder-notebook/ui-components": "file:../ui-components"
   },
   "devDependencies": {
     "typescript": "~4.9.3"

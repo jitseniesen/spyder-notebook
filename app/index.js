@@ -60,15 +60,15 @@ async function main() {
   const disabled = [];
   // TODO: formalize the way the set of initial extensions and plugins are specified
   let baseMods = [
-    // @jupyter-notebook plugins
-    require('@jupyter-notebook/application-extension'),
-    require('@jupyter-notebook/console-extension'),
-    require('@jupyter-notebook/docmanager-extension'),
-    require('@jupyter-notebook/documentsearch-extension'),
-    require('@jupyter-notebook/help-extension'),
-    require('@jupyter-notebook/notebook-extension'),
+    // @spyder-notebook plugins
+    require('@spyder-notebook/application-extension'),
+    require('@spyder-notebook/console-extension'),
+    require('@spyder-notebook/docmanager-extension'),
+    require('@spyder-notebook/documentsearch-extension'),
+    require('@spyder-notebook/help-extension'),
+    require('@spyder-notebook/notebook-extension'),
     // to handle opening new tabs after creating a new terminal
-    require('@jupyter-notebook/terminal-extension'),
+    require('@spyder-notebook/terminal-extension'),
 
     // @jupyterlab plugins
     require('@jupyterlab/application-extension').default.filter(({ id }) =>
@@ -171,7 +171,7 @@ async function main() {
             '@jupyterlab/filebrowser-extension:share-file'
           ].includes(id)
         ),
-        require('@jupyter-notebook/tree-extension'),
+        require('@spyder-notebook/tree-extension'),
         require('@jupyterlab/running-extension'),
         require('@jupyterlab/settingeditor-extension').default.filter(
           ({ id }) =>
@@ -357,7 +357,7 @@ async function main() {
       console.error(reason);
     });
 
-  const NotebookApp = require('@jupyter-notebook/application').NotebookApp;
+  const NotebookApp = require('@spyder-notebook/application').NotebookApp;
   const app = new NotebookApp({ mimeExtensions });
 
   app.registerPluginModules(mods);

@@ -17,7 +17,7 @@ import { find } from '@lumino/algorithm';
  * A plugin to open consoles in a new tab
  */
 const opener: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/console-extension:opener',
+  id: '@spyder-notebook/console-extension:opener',
   requires: [IRouter],
   autoStart: true,
   activate: (app: JupyterFrontEnd, router: IRouter) => {
@@ -50,7 +50,7 @@ const opener: JupyterFrontEndPlugin<void> = {
  * Open consoles in a new tab.
  */
 const redirect: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/console-extension:redirect',
+  id: '@spyder-notebook/console-extension:redirect',
   requires: [IConsoleTracker],
   autoStart: true,
   activate: (app: JupyterFrontEnd, tracker: IConsoleTracker) => {

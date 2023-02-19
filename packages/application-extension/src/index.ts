@@ -38,9 +38,9 @@ import {
   SidePanel,
   SidePanelHandler,
   SidePanelPalette
-} from '@jupyter-notebook/application';
+} from '@spyder-notebook/application';
 
-import { jupyterIcon } from '@jupyter-notebook/ui-components';
+import { jupyterIcon } from '@spyder-notebook/ui-components';
 
 import { PromiseDelegate } from '@lumino/coreutils';
 
@@ -106,7 +106,7 @@ namespace CommandIDs {
  * Check if the application is dirty before closing the browser tab.
  */
 const dirty: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/application-extension:dirty',
+  id: '@spyder-notebook/application-extension:dirty',
   autoStart: true,
   requires: [ILabStatus, ITranslator],
   activate: (
@@ -134,7 +134,7 @@ const dirty: JupyterFrontEndPlugin<void> = {
  * The logo plugin.
  */
 const logo: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/application-extension:logo',
+  id: '@spyder-notebook/application-extension:logo',
   autoStart: true,
   activate: (app: JupyterFrontEnd) => {
     const baseUrl = PageConfig.getBaseUrl();
@@ -161,7 +161,7 @@ const logo: JupyterFrontEndPlugin<void> = {
  * A plugin to open documents in the main area.
  */
 const opener: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/application-extension:opener',
+  id: '@spyder-notebook/application-extension:opener',
   autoStart: true,
   requires: [IRouter, IDocumentManager],
   activate: (
@@ -200,7 +200,7 @@ const opener: JupyterFrontEndPlugin<void> = {
  * A plugin to customize menus
  */
 const menus: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/application-extension:menus',
+  id: '@spyder-notebook/application-extension:menus',
   requires: [IMainMenu],
   autoStart: true,
   activate: (app: JupyterFrontEnd, menu: IMainMenu) => {
@@ -230,7 +230,7 @@ const menus: JupyterFrontEndPlugin<void> = {
  * A plugin to provide a spacer at rank 900 in the menu area
  */
 const menuSpacer: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/application-extension:menu-spacer',
+  id: '@spyder-notebook/application-extension:menu-spacer',
   autoStart: true,
   activate: (app: JupyterFrontEnd) => {
     const menu = new Widget();
@@ -244,7 +244,7 @@ const menuSpacer: JupyterFrontEndPlugin<void> = {
  * Add commands to open the tree and running pages.
  */
 const pages: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/application-extension:pages',
+  id: '@spyder-notebook/application-extension:pages',
   autoStart: true,
   requires: [ITranslator],
   optional: [ICommandPalette],
@@ -286,7 +286,7 @@ const pages: JupyterFrontEndPlugin<void> = {
  * The default paths for a Jupyter Notebook app.
  */
 const paths: JupyterFrontEndPlugin<JupyterFrontEnd.IPaths> = {
-  id: '@jupyter-notebook/application-extension:paths',
+  id: '@spyder-notebook/application-extension:paths',
   autoStart: true,
   provides: JupyterFrontEnd.IPaths,
   activate: (app: JupyterFrontEnd): JupyterFrontEnd.IPaths => {
@@ -301,7 +301,7 @@ const paths: JupyterFrontEndPlugin<JupyterFrontEnd.IPaths> = {
  * The default session dialogs plugin
  */
 const sessionDialogs: JupyterFrontEndPlugin<ISessionContextDialogs> = {
-  id: '@jupyter-notebook/application-extension:session-dialogs',
+  id: '@spyder-notebook/application-extension:session-dialogs',
   provides: ISessionContextDialogs,
   autoStart: true,
   activate: () => sessionContextDialogs
@@ -311,7 +311,7 @@ const sessionDialogs: JupyterFrontEndPlugin<ISessionContextDialogs> = {
  * The default Jupyter Notebook application shell.
  */
 const shell: JupyterFrontEndPlugin<INotebookShell> = {
-  id: '@jupyter-notebook/application-extension:shell',
+  id: '@spyder-notebook/application-extension:shell',
   activate: (app: JupyterFrontEnd) => {
     if (!(app.shell instanceof NotebookShell)) {
       throw new Error(`${shell.id} did not find a NotebookShell instance.`);
@@ -326,7 +326,7 @@ const shell: JupyterFrontEndPlugin<INotebookShell> = {
  * The default JupyterLab application status provider.
  */
 const status: JupyterFrontEndPlugin<ILabStatus> = {
-  id: '@jupyter-notebook/application-extension:status',
+  id: '@spyder-notebook/application-extension:status',
   autoStart: true,
   provides: ILabStatus,
   activate: (app: JupyterFrontEnd) => {
@@ -341,7 +341,7 @@ const status: JupyterFrontEndPlugin<ILabStatus> = {
  * A plugin to display the document title in the browser tab title
  */
 const tabTitle: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/application-extension:tab-title',
+  id: '@spyder-notebook/application-extension:tab-title',
   autoStart: true,
   requires: [INotebookShell],
   activate: (app: JupyterFrontEnd, shell: INotebookShell) => {
@@ -377,7 +377,7 @@ const tabTitle: JupyterFrontEndPlugin<void> = {
  * A plugin to display and rename the title of a file
  */
 const title: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/application-extension:title',
+  id: '@spyder-notebook/application-extension:title',
   autoStart: true,
   requires: [INotebookShell, ITranslator],
   optional: [IDocumentManager, IRouter, IToolbarWidgetRegistry],
@@ -475,7 +475,7 @@ const title: JupyterFrontEndPlugin<void> = {
  * Plugin to toggle the top header visibility.
  */
 const topVisibility: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/application-extension:top',
+  id: '@spyder-notebook/application-extension:top',
   requires: [INotebookShell, ITranslator],
   optional: [ISettingRegistry, ICommandPalette],
   activate: (
@@ -549,7 +549,7 @@ const topVisibility: JupyterFrontEndPlugin<void> = {
  * Plugin to toggle the left or right side panel's visibility.
  */
 const sidePanelVisibility: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/application-extension:sidepanel',
+  id: '@spyder-notebook/application-extension:sidepanel',
   requires: [INotebookShell, ITranslator],
   optional: [IMainMenu, ICommandPalette],
   autoStart: true,
@@ -764,7 +764,7 @@ const sidePanelVisibility: JupyterFrontEndPlugin<void> = {
  * The default tree route resolver plugin.
  */
 const tree: JupyterFrontEndPlugin<JupyterFrontEnd.ITreeResolver> = {
-  id: '@jupyter-notebook/application-extension:tree-resolver',
+  id: '@spyder-notebook/application-extension:tree-resolver',
   autoStart: true,
   requires: [IRouter],
   provides: JupyterFrontEnd.ITreeResolver,
@@ -823,7 +823,7 @@ const tree: JupyterFrontEndPlugin<JupyterFrontEnd.ITreeResolver> = {
 };
 
 const treePathUpdater: JupyterFrontEndPlugin<ITreePathUpdater> = {
-  id: '@jupyter-notebook/application-extension:tree-updater',
+  id: '@spyder-notebook/application-extension:tree-updater',
   requires: [IRouter],
   provides: ITreePathUpdater,
   activate: (app: JupyterFrontEnd, router: IRouter) => {
@@ -845,7 +845,7 @@ const treePathUpdater: JupyterFrontEndPlugin<ITreePathUpdater> = {
 };
 
 const translator: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/application-extension:translator',
+  id: '@spyder-notebook/application-extension:translator',
   requires: [INotebookShell, ITranslator],
   autoStart: true,
   activate: (
@@ -861,7 +861,7 @@ const translator: JupyterFrontEndPlugin<void> = {
  * Zen mode plugin
  */
 const zen: JupyterFrontEndPlugin<void> = {
-  id: '@jupyter-notebook/application-extension:zen',
+  id: '@spyder-notebook/application-extension:zen',
   autoStart: true,
   requires: [ITranslator],
   optional: [ICommandPalette, INotebookShell],
