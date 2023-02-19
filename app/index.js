@@ -357,7 +357,7 @@ async function main() {
       console.error(reason);
     });
 
-  const NotebookApp = require('@spyder-notebook/application').NotebookApp;
+  const NotebookApp = require('@spyder-notebook/application').SpyderNotebookApp;
   const app = new NotebookApp({ mimeExtensions });
 
   app.registerPluginModules(mods);

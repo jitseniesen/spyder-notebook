@@ -205,3 +205,16 @@ namespace Private {
     app.format = window.matchMedia(MOBILE_QUERY).matches ? 'mobile' : 'desktop';
   }
 }
+
+export class SpyderNotebookApp extends NotebookApp {
+  /**
+   * Construct a new SpyderNotebookApp object.
+   *
+   * @param options The instantiation options for an application.
+   */
+  constructor(options: NotebookApp.IOptions = { shell: new NotebookShell() }) {
+    super({ ...options, shell: options.shell ?? new NotebookShell() });
+
+    alert('SpyderNotebookApp constructed!');
+  }
+}
