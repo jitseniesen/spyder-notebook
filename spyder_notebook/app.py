@@ -21,7 +21,7 @@ from notebook_shim.shim import NotebookConfigShimMixin  # type:ignore
 from tornado import web
 from traitlets import Bool, default
 
-from ._version import __version__
+from spyder_notebook._version import __version__
 
 HERE = os.path.dirname(__file__)
 

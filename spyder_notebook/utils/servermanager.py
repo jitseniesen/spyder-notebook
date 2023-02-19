@@ -189,7 +189,7 @@ class ServerManager(QObject):
 
         logger.debug('Starting new notebook server for %s', nbdir)
         process = QProcess(None)
-        serverscript = osp.join(osp.dirname(__file__), '../server/main.py')
+        serverscript = osp.join(osp.dirname(__file__), '../app.py')
         serverscript = osp.normpath(serverscript)
         arguments = [serverscript, '--no-browser',
                      '--notebook-dir={}'.format(nbdir),

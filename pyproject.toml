@@ -39,6 +39,9 @@ dependencies = [
 ]
 dynamic = ["version"]
 
+[project.entry-points."spyder.plugins"]
+notebook = "spyder_notebook.notebookplugin:NotebookPlugin"
+
 [project.scripts]
 jupyter-notebook = "spyder_notebook.app:main"
 
