@@ -74,7 +74,6 @@ docs = [
     "sphinxcontrib_spelling"
 ]
 dev = [
-    "pre-commit",
     "hatch"
 ]
 
@@ -170,8 +169,6 @@ ensured-targets = [
     "spyder_notebook/labextension/static/style.js",
     "spyder_notebook/static/bundle.js"
 ]
-install-pre-commit-hook = true
-
 [tool.hatch.build.hooks.jupyter-builder.build-kwargs]
 build_cmd = "build:prod"
 editable_build_cmd = "build"
