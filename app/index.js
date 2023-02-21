@@ -370,6 +370,7 @@ async function main() {
     window.jupyterapp = app;
   }
 
+  alert('Spyder was here!');
   await app.start();
 }
 
