@@ -153,7 +153,7 @@ class TreeHandler(NotebookBaseHandler):
             # it's not a directory, we have redirecting to do
             model = await ensure_async(cm.get(path, content=False))
             if model["type"] == "notebook":
-                url = ujoin(self.base_url, "notebooks", url_escape(path))
+                url = ujoin(self.base_url, "funbooks", url_escape(path))
             else:
                 # Return raw content if file is not a notebook
                 url = ujoin(self.base_url, "files", url_escape(path))
@@ -216,7 +216,7 @@ class JupyterNotebookApp(NotebookConfigShimMixin, LabServerApp):
     app_version = version
     extension_url = "/"
     default_url = "/tree"  # type:ignore
-    file_url_prefix = "/notebooks"
+    file_url_prefix = "/funbooks"
     load_other_extensions = True
     app_dir = app_dir
     subcommands: dict = {}
@@ -272,7 +272,7 @@ class JupyterNotebookApp(NotebookConfigShimMixin, LabServerApp):
         )
         self.handlers.append(("/?", RedirectHandler))
         self.handlers.append(("/tree(.*)", TreeHandler))
-        self.handlers.append(("/notebooks(.*)", NotebookHandler))
+        self.handlers.append(("/funbooks(.*)", NotebookHandler))
         self.handlers.append(("/edit(.*)", FileHandler))
         self.handlers.append(("/consoles/(.*)", ConsoleHandler))
         self.handlers.append(("/terminals/(.*)", TerminalHandler))
