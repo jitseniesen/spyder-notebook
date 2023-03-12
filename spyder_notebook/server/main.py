@@ -4,74 +4,45 @@
 """Entry point for server rendering notebooks for Spyder."""
 
 import os
-from jinja2 import FileSystemLoader
-from jupyter_server.utils import url_path_join as ujoin
-from notebook.app import (
-    flags, JupyterNotebookApp, NotebookBaseHandler)
-from traitlets import Bool
+from notebook.app import JupyterNotebookApp, NotebookBaseHandler
+from tornado import web
+from traitlets import default
 
 HERE = os.path.dirname(__file__)
 
-flags['dark'] = (
-    {'SpyderNotebookServer': {'dark_theme': True}},
-    'Use dark theme when rendering notebooks'
-)
+
+class SpyderNotebookHandler(NotebookBaseHandler):
+    """A notebook page handler for Spyder."""
+
+    @web.authenticated
+    def get(self, path=None):
+        """Get the notebook page."""
+        tpl = self.render_template(
+            'notebook-template.html', page_config=self.get_page_config())
+        return self.write(tpl)
 
 
-class NotebookHandler(NotebookBaseHandler):
-    """
-    Serve a notebook file from the filesystem in the notebook interface
-    """
+class SpyderNotebookApp(JupyterNotebookApp):
+    """The Spyder notebook server extension app."""
 
-    def get(self, filename):
-        """Get the main page for the application's interface."""
-        # Options set here can be read with PageConfig.getOption
-        config_data = {
-            # Use camelCase here, since that's what the lab components expect
-            'baseUrl': self.base_url,
-            'token': self.settings['token'],
-            'darkTheme': self.settings['dark_theme'],
-            'notebookPath': filename,
-            'frontendUrl': ujoin(self.base_url, 'static/'),
-            # FIXME: Don't use a CDN here
-            'mathjaxUrl': 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/'
-                          '2.7.5/MathJax.js',
-            'mathjaxConfig': "TeX-AMS_CHTML-full,Safe"
-        }
-        return self.write(
-            self.render_template(
-                'index.html',
-                static=self.static_url,
-                base_url=self.base_url,
-                config_data=config_data
-            )
-        )
+    name = 'spyder_notebook'
+    file_url_prefix = "/notebooks"
 
-    def get_template(self, name):
-        loader = FileSystemLoader(HERE)
-        return loader.load(self.settings['jinja2_env'], name)
+    @default('static_dir')
+    def _default_static_dir(self):
+        return os.path.join(HERE, 'static')
+
+    @default('templates_dir')
+    def _default_templates_dir(self):
+        return HERE
+
+    def initialize_handlers(self):
+        """Initialize handlers."""
+        self.handlers.append(('/notebooks(.*)', SpyderNotebookHandler))
+        super().initialize_handlers()
 
 
-class SpyderNotebookServer(JupyterNotebookApp):
-    """Server rendering notebooks in HTML and serving them over HTTP."""
+main = SpyderNotebookApp.launch_instance
 
-    flags = flags
-
-    dark_theme = Bool(
-        False, config=True,
-        help='Whether to use dark theme when rendering notebooks')
-
-    def init_webapp(self):
-        """Initialize tornado webapp and httpserver."""
-        self.tornado_settings['dark_theme'] = self.dark_theme
-
-        super().init_webapp()
-
-        default_handlers = [
-            (ujoin(self.base_url, r'/notebook/(.*)'), NotebookHandler),
-        ]
-        self.web_app.add_handlers('.*$', default_handlers)
-
-
-if __name__ == '__main__':
-    SpyderNotebookServer.launch_instance()
+if __name__ == "__main__":
+    main()
