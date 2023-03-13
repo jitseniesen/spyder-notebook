@@ -26,7 +26,7 @@ class SpyderNotebookApp(JupyterNotebookApp):
     """The Spyder notebook server extension app."""
 
     name = 'spyder_notebook'
-    file_url_prefix = "/notebooks"
+    file_url_prefix = "/spyder-notebooks"
 
     @default('static_dir')
     def _default_static_dir(self):
@@ -38,7 +38,7 @@ class SpyderNotebookApp(JupyterNotebookApp):
 
     def initialize_handlers(self):
         """Initialize handlers."""
-        self.handlers.append(('/notebooks(.*)', SpyderNotebookHandler))
+        self.handlers.append(('/spyder-notebooks(.*)', SpyderNotebookHandler))
         super().initialize_handlers()
 
 
