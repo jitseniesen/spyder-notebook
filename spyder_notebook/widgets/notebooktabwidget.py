@@ -450,13 +450,15 @@ class NotebookTabWidget(Tabs, SpyderConfigurationAccessor):
         process : ServerProcess
             Info about the server that has started.
         """
-        pid = process.process.processId()
+        pid = process.pid
+        print(f'handle_server_started: {pid=}, {self.count()=}')
         for client_index in range(self.count()):
             client = self.widget(client_index)
             if not client.static and not client.server_url:
                 logger.debug('Getting server for %s', client.filename)
                 server_info = self.server_manager.get_server(
                     client.filename, process.interpreter, start=False)
+                print(f'handle_server_started: {client.filename=}, {server_info=}')
                 if server_info and server_info['pid'] == pid:
                     logger.debug('Success')
                     client.register(server_info)

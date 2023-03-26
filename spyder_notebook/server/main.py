@@ -76,4 +76,5 @@ class SpyderNotebookServer(NotebookApp):
 
 
 if __name__ == '__main__':
+    print(f'spyder-notebook: pid = {os.getpid()}')
     SpyderNotebookServer.launch_instance()

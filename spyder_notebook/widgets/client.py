@@ -333,7 +333,9 @@ class NotebookClient(QFrame):
 
     def go_to(self, url_or_text):
         """Go to page URL."""
+        print(f'go_to: {url_or_text=}')
         if isinstance(url_or_text, str):
+            print('go_to: handled as url')
             url = QUrl(url_or_text)
         else:
             url = url_or_text

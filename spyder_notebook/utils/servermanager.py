@@ -12,9 +12,11 @@ import json
 import logging
 import os.path as osp
 import sys
+import re
 
 # Qt imports
 from qtpy.QtCore import QObject, QProcess, QProcessEnvironment, QTimer, Signal
+from qtpy.QtWidgets import QMessageBox
 
 # Third-party imports
 from jupyter_core.paths import jupyter_runtime_dir
@@ -54,7 +56,8 @@ class ServerProcess:
     """
 
     def __init__(self, process, notebook_dir, interpreter, starttime=None,
-                 state=ServerState.STARTING, server_info=None, output=''):
+                 state=ServerState.STARTING, server_info=None, output='',
+                 pid=None):
         """
         Construct a ServerProcess.
 
@@ -75,9 +78,10 @@ class ServerProcess:
             If set, this is a dict with information given by the server in
             a JSON file in jupyter_runtime_dir(). It has keys like 'url' and
             'token'. The default is None.
-        output : str
+        output : str, optional
             Output of the server process from stdout and stderr. The default
             is ''.
+        pid : int or None, optional
         """
         self.process = process
         self.notebook_dir = notebook_dir
@@ -86,6 +90,7 @@ class ServerProcess:
         self.state = state
         self.server_info = server_info
         self.output = output
+        self.pid = pid
 
 
 class ServerManager(QObject):
@@ -246,14 +251,26 @@ class ServerManager(QObject):
         if server_process.state != ServerState.STARTING:
             return
 
-        pid = server_process.process.processId()
-        runtime_dir = jupyter_runtime_dir()
-        filename = osp.join(runtime_dir, 'nbserver-{}.json'.format(pid))
+        server_info = None
+        if server_process.pid:
+            runtime_dir = jupyter_runtime_dir()
+            filename = osp.join(runtime_dir, 
+                                'nbserver-{}.json'.format(server_process.pid))
 
-        try:
-            with open(filename, encoding='utf-8') as f:
-                server_info = json.load(f)
-        except OSError:  # E.g., file does not exist
+            try:
+                with open(filename, encoding='utf-8') as f:
+                    server_info = json.load(f)
+            except OSError:  # E.g., file does not exist
+                pass
+        
+        if server_info:
+            logger.debug('Server for %s started', server_process.notebook_dir)
+            server_process.state = ServerState.RUNNING
+            server_process.server_info = server_info
+            print(f'check_server_started: {server_info=}')
+            # QMessageBox.information(None, 'Server info', str(server_info))
+            self.sig_server_started.emit(server_process)
+        else:
             delay = datetime.datetime.now() - server_process.starttime
             if delay > datetime.timedelta(seconds=SERVER_TIMEOUT_DELAY):
                 logger.debug('Notebook server for %s timed out',
@@ -264,12 +281,7 @@ class ServerManager(QObject):
                 QTimer.singleShot(
                     CHECK_SERVER_UP_DELAY,
                     lambda: self._check_server_started(server_process))
-            return None
 
-        logger.debug('Server for %s started', server_process.notebook_dir)
-        server_process.state = ServerState.RUNNING
-        server_process.server_info = server_info
-        self.sig_server_started.emit(server_process)
 
     def shutdown_all_servers(self):
         """Shutdown all running servers."""
@@ -298,6 +310,12 @@ class ServerManager(QObject):
         """
         byte_array = server_process.process.readAllStandardOutput()
         output = byte_array.data().decode(errors='backslashreplace')
+        if not server_process.pid:
+            for line in output.splitlines():
+                match = re.search('nbserver-([0-9]+)-open.html$', line)
+                if match:
+                    server_process.pid = int(match.group(1))
+                    print(f'read_server_output: {server_process.pid=}')
         server_process.output += output
 
     def handle_error(self, server_process, error):
