@@ -9,9 +9,6 @@
 Testing utilities to be used with pytest.
 """
 
-# Copied from conftest.py in main Spyder repo, with one change in
-# register_plugin() inside ConfigDialogTester.
-
 # Standard library imports
 import sys
 import types
@@ -19,22 +16,29 @@ from unittest.mock import Mock, MagicMock
 
 # Third party imports
 from qtpy.QtGui import QIcon
-from qtpy.QtWidgets import QWidget, QMainWindow
+from qtpy.QtWidgets import QApplication, QMainWindow, QWidget
 import pytest
 
 # Local imports
 from spyder.api.plugins import Plugins
 from spyder.api.plugin_registration.registry import PLUGIN_REGISTRY
+from spyder.app import start
 from spyder.app.cli_options import get_options
 from spyder.config.manager import CONF
-from spyder.plugins.preferences.plugin import Preferences
 from spyder.utils.icon_manager import ima
 
+
+#%% ConfigDialog fixture
+#
+# Copied from conftest.py in main Spyder repo, with one change in
+# register_plugin() inside ConfigDialogTester.
 
 class MainWindowMock(QMainWindow):
     register_shortcut = Mock()
 
     def __init__(self, parent):
+        from spyder.plugins.preferences.plugin import Preferences
+
         super().__init__(parent)
         self.default_style = None
         self.widgetlist = []
@@ -76,6 +80,8 @@ class MainWindowMock(QMainWindow):
 class ConfigDialogTester(QWidget):
     def __init__(self, parent, main_class,
                  general_config_plugins, plugins):
+        from spyder.plugins.preferences.plugin import Preferences
+
         super().__init__(parent)
         self._main = main_class(self) if main_class else None
         if self._main is None:
@@ -133,3 +139,29 @@ def config_dialog(qtbot, request, mocker):
     yield dlg
 
     dlg.close()
+
+
+#%% main_window fixture
+#
+# Copied from conftest.py in spyder-unittest repo
+
+@pytest.fixture
+def main_window(monkeypatch):
+    """Main Window fixture"""
+
+    # Don't show tours message
+    CONF.set('tours', 'show_tour_message', False)
+    QApplication.processEvents()
+
+    # Start the window
+    window = start.main()
+    QApplication.processEvents()
+
+    yield window
+
+    # Close main window
+    window.closing(close_immediately=True)
+    window.close()
+    CONF.reset_to_defaults(notification=False)
+    CONF.reset_manager()
+    PLUGIN_REGISTRY.reset()
