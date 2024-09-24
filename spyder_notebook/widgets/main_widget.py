@@ -336,3 +336,13 @@ class NotebookMainWidget(PluginMainWidget):
         """Clear the list of recent notebooks."""
         self.recent_notebooks = []
         self.update_recent_notebooks_menu()
+
+    def get_current_filename(self):
+        """
+        Get file name of currently displayed notebook.
+        """
+        client = self.tabwidget.currentWidget()
+        if self.tabwidget.is_welcome_client(client):
+            return None
+        else:
+            return client.get_filename()

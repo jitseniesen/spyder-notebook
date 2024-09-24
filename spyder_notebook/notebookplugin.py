@@ -36,6 +36,8 @@ class NotebookPlugin(SpyderDockablePlugin):
     CONF_VERSION = CONF_VERSION
     WIDGET_CLASS = NotebookMainWidget
     CONF_WIDGET_CLASS = NotebookConfigPage
+    REQUIRE_WEB_WIDGETS = True
+    FILE_EXTENSIONS = ['.ipynb']
 
     # ---- SpyderDockablePlugin API
     # ------------------------------------------------------------------------
@@ -94,9 +96,25 @@ class NotebookPlugin(SpyderDockablePlugin):
     def on_mainwindow_visible(self):
         self.get_widget().open_previous_session()
 
-    # ------ Public API -------------------------------------------------------
-    def open_notebook(self, filenames=None):
-        self.get_widget().open_notebook(filenames)
+    def open_file(self, filename):
+        """
+        Open file inside plugin.
+
+        This method will be called if the user wants to open a notebook.
+
+        Parameters
+        ----------
+        filename: str
+            The name of the file to be opened.
+        """
+        self.get_widget().open_notebook([filename])
+
+    def get_current_filename(self):
+        """
+        Get file name of currently displayed notebook.
+        """
+        print(f'get_current_filename returns {self.get_widget().get_current_filename()}')
+        return self.get_widget().get_current_filename()
 
     # ------ Private API ------------------------------------------------------
     def _open_console(self, connection_file, tab_name):
