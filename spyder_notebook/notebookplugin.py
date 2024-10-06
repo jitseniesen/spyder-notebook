@@ -8,6 +8,7 @@
 # Standard library imports
 import logging
 import os.path as osp
+from typing import Optional
 
 # Spyder imports
 from spyder.api.plugins import Plugins, SpyderDockablePlugin
@@ -109,12 +110,17 @@ class NotebookPlugin(SpyderDockablePlugin):
         """
         self.get_widget().open_notebook([filename])
 
-    def get_current_filename(self):
+    def get_current_filename(self) -> Optional[str]:
         """
-        Get file name of currently displayed notebook.
+        Return file name of the notebook that is currently displayed.
         """
-        print(f'get_current_filename returns {self.get_widget().get_current_filename()}')
         return self.get_widget().get_current_filename()
+
+    def current_file_is_temporary(self) -> bool:
+        """
+        Return whether currently displayed file is a temporary file.
+        """
+        return self.get_widget().current_file_is_temporary()
 
     # ------ Private API ------------------------------------------------------
     def _open_console(self, connection_file, tab_name):

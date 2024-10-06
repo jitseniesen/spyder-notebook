@@ -346,3 +346,10 @@ class NotebookMainWidget(PluginMainWidget):
             return None
         else:
             return client.get_filename()
+
+    def current_file_is_temporary(self) -> bool:
+        """
+        Return whether currently displayed file is a temporary file.
+        """
+        client = self.tabwidget.currentWidget()
+        return self.tabwidget.is_newly_created(client)
