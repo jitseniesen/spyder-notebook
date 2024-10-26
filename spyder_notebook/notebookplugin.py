@@ -38,6 +38,7 @@ class NotebookPlugin(SpyderDockablePlugin):
     WIDGET_CLASS = NotebookMainWidget
     CONF_WIDGET_CLASS = NotebookConfigPage
     REQUIRE_WEB_WIDGETS = True
+    CAN_CREATE_NEW_FILE = True
     FILE_EXTENSIONS = ['.ipynb']
 
     # ---- SpyderDockablePlugin API
@@ -96,6 +97,12 @@ class NotebookPlugin(SpyderDockablePlugin):
 
     def on_mainwindow_visible(self):
         self.get_widget().open_previous_session()
+
+    def create_new_file(self) -> None:
+        """
+        Create a new notebook.
+        """
+        self.get_widget().create_new_client()
 
     def open_file(self, filename):
         """
