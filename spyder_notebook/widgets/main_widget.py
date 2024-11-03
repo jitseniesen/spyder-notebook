@@ -177,6 +177,7 @@ class NotebookMainWidget(PluginMainWidget):
 
         # Register shortcuts for file actions defined in Applications plugin
         for action_id in [
+            'New file',
             'Open file'
         ]:
             action = self.get_action(action_id, plugin=Plugins.Application)
