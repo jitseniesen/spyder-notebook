@@ -30,7 +30,7 @@ class NotebookPlugin(SpyderDockablePlugin):
 
     NAME = 'notebook'
     REQUIRES = [Plugins.Preferences]
-    OPTIONAL = [Plugins.IPythonConsole, Plugins.Switcher]
+    OPTIONAL = [Plugins.Application, Plugins.IPythonConsole, Plugins.Switcher]
     TABIFY = [Plugins.Editor]
     CONF_SECTION = NAME
     CONF_DEFAULTS = CONF_DEFAULTS
@@ -64,6 +64,12 @@ class NotebookPlugin(SpyderDockablePlugin):
         """Set up the plugin; does nothing."""
         pass
 
+    @on_plugin_available(plugin=Plugins.Application)
+    def on_application_available(self) -> None:
+        application = self.get_plugin(Plugins.Application)
+        widget = self.get_widget()
+        widget.sig_new_recent_file.connect(application.add_recent_file)
+
     @on_plugin_available(plugin=Plugins.Preferences)
     def on_preferences_available(self):
         preferences = self.get_plugin(Plugins.Preferences)
@@ -79,6 +85,12 @@ class NotebookPlugin(SpyderDockablePlugin):
         switcher = self.get_plugin(Plugins.Switcher)
         switcher.sig_mode_selected.connect(self._handle_switcher_modes)
         switcher.sig_item_selected.connect(self._handle_switcher_selection)
+
+    @on_plugin_teardown(plugin=Plugins.Application)
+    def on_application_teardown(self) -> None:
+        application = self.get_plugin(Plugins.Application)
+        widget = self.get_widget()
+        widget.sig_new_recent_file.disconnect(application.add_recent_file)
 
     @on_plugin_teardown(plugin=Plugins.Preferences)
     def on_preferences_teardown(self):
