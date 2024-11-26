@@ -40,6 +40,7 @@ class NotebookPlugin(SpyderDockablePlugin):
     REQUIRE_WEB_WIDGETS = True
     CAN_CREATE_NEW_FILE = True
     CAN_OPEN_LAST_CLOSED_FILE = True
+    CAN_SAVE_FILE = True
     FILE_EXTENSIONS = ['.ipynb']
 
     # ---- SpyderDockablePlugin API
@@ -135,6 +136,12 @@ class NotebookPlugin(SpyderDockablePlugin):
         Reopens the notebook in the last closed tab.
         """
         self.get_widget().open_last_closed_notebook()
+
+    def save_file(self) -> None:
+        """
+        Save the current notebook.
+        """
+        self.get_widget().save_notebook()
 
     def get_current_filename(self) -> Optional[str]:
         """
