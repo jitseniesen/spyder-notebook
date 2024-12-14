@@ -38,9 +38,7 @@ class NotebookPlugin(SpyderDockablePlugin):
     WIDGET_CLASS = NotebookMainWidget
     CONF_WIDGET_CLASS = NotebookConfigPage
     REQUIRE_WEB_WIDGETS = True
-    CAN_CREATE_NEW_FILE = True
-    CAN_OPEN_LAST_CLOSED_FILE = True
-    CAN_SAVE_FILE = True
+    CAN_HANDLE_FILE_ACTIONS = True
     FILE_EXTENSIONS = ['.ipynb']
 
     # ---- SpyderDockablePlugin API
