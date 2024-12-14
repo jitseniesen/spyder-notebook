@@ -281,6 +281,14 @@ class NotebookMainWidget(PluginMainWidget):
         client = self.tabwidget.currentWidget()
         self.tabwidget.save_notebook(client)
 
+    def save_all(self) -> None:
+        """
+        Save all opened notebooks.
+        """
+        for client_index in range(self.tabwidget.count()):
+            client = self.tabwidget.widget(client_index)
+            self.tabwidget.save_notebook(client)
+
     def save_as(self):
         """Save current notebook to different file."""
         old_filename = self.tabwidget.currentWidget()
